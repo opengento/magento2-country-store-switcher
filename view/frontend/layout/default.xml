@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="country_store_customer_data">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="countryStoreSwitcherFirstVisit" xsi:type="array">
+                            <item name="component" xsi:type="string">Opengento_CountryStoreSwitcher/js/view/open-modal</item>
+                            <item name="config" xsi:type="array">
+                                <item name="componentDisabled" xsi:type="helper" helper="Opengento\CountryStoreSwitcher\Ui\Component\RedirectDialog\Status::isDisabled"/>
+                                <item name="cookieName" xsi:type="string">country-store-switcher-first-redirect</item>
+                                <item name="triggerSelector" xsi:type="string">[data-trigger=country-store-switcher]</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="store_language" template="Opengento_CountryStoreSwitcher::switch/popin/forehead.phtml">
+            <arguments>
+                <argument name="localized" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\Localized</argument>
+                <argument name="switcherProvider" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\SwitcherUrlProvider</argument>
+                <argument name="countryViewModel" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\SwitchCountry\Forehead</argument>
+                <argument name="urlAction" xsi:type="url" path="stores/country/redirect"/>
+            </arguments>
+            <block name="store_language_more" as="more" template="Opengento_CountryStoreSwitcher::switch/country/more.phtml">
+                <arguments>
+                    <argument name="localized" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\Localized</argument>
+                    <argument name="switcherProvider" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\SwitcherUrlProvider</argument>
+                    <argument name="countryViewModel" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\SwitchCountry\More</argument>
+                    <argument name="urlAction" xsi:type="url" path="stores/country/redirect"/>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="store.settings.language" template="Opengento_CountryStoreSwitcher::switch/country/forehead.phtml">
+            <arguments>
+                <argument name="id_modifier" xsi:type="string">nav</argument>
+                <argument name="localized" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\Localized</argument>
+                <argument name="switcherProvider" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\SwitcherUrlProvider</argument>
+                <argument name="countryViewModel" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\SwitchCountry\Forehead</argument>
+                <argument name="urlAction" xsi:type="url" path="stores/country/redirect"/>
+            </arguments>
+            <block name="store.settings.language.more" as="more" template="Opengento_CountryStoreSwitcher::switch/country/more.phtml">
+                <arguments>
+                    <argument name="localized" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\Localized</argument>
+                    <argument name="switcherProvider" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\SwitcherUrlProvider</argument>
+                    <argument name="countryViewModel" xsi:type="object">Opengento\CountryStoreSwitcher\ViewModel\SwitchCountry\More</argument>
+                    <argument name="urlAction" xsi:type="url" path="stores/country/redirect"/>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

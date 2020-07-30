@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <country>
+            <redirect>
+                <enabled>0</enabled>
+                <dialog>1</dialog>
+                <ignore_actions>stores/country/legacyredirect,stores/country/redirect,stores/store/redirect,stores/store/switch</ignore_actions>
+            </redirect>
+            <switcher>
+                <localized>0</localized>
+            </switcher>
+        </country>
+    </default>
+</config>

@@ -1,0 +1,50 @@
+<?php
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Data\Helper\PostHelper;
+use Magento\Framework\View\Element\Template;
+use Opengento\CountryStoreSwitcher\ViewModel\Localized;
+use Opengento\CountryStoreSwitcher\ViewModel\SwitchCountry\More;
+use Opengento\CountryStoreSwitcher\ViewModel\SwitcherUrlProvider;
+
+/** @var Template $block */
+
+$helper = $this->helper(PostHelper::class);
+
+/** @var Localized $localized */
+$localized = $block->getData('localized');
+
+/** @var SwitcherUrlProvider $switcherProvider */
+$switcherProvider = $block->getData('switcherProvider');
+
+/** @var More $countryViewModel */
+$countryViewModel = $block->getData('countryViewModel');
+
+$countries = $countryViewModel->getCountries();
+?>
+<?php if (count($countries)): ?>
+    <div class="field field-country-store-switcher" data-bind="scope: 'countryStoreData'">
+        <label class="label" for="country-store-switcher-more">
+            <span><?= $block->escapeHtml(__('More Countries')) ?></span>
+        </label>
+        <div class="control">
+            <select class="select" id="country-store-switcher-more" data-role="country-store-switcher-post" data-mage-init='{"postCountryStoreSwitcher":{}}'>
+                <option value="" class="view">
+                    <?= $block->escapeHtml(__('-- Please select --')) ?>
+                </option>
+                <?php foreach ($countries as $country): ?>
+                    <option value="<?= $block->escapeHtmlAttr($country->getCode()) ?>"
+                            class="view-<?= $block->escapeHtmlAttr(strtolower($country->getCode())) ?> switcher-option"
+                            data-post='<?= $helper->getPostData($block->getData('urlAction'), $switcherProvider->getTargetParams($country)) ?>'
+                            data-bind="attr: {selected: countryStoreData().code === '<?= $block->escapeHtml($country->getCode()) ?>' ? 'selected' : null}">
+                        <?= $block->escapeHtml($localized->getCountryName($country)) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+<?php endif; ?>

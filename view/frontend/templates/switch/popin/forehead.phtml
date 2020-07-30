@@ -1,0 +1,63 @@
+<?php
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Data\Helper\PostHelper;
+use Magento\Framework\View\Element\Template;
+use Opengento\CountryStoreSwitcher\ViewModel\Localized;
+use Opengento\CountryStoreSwitcher\ViewModel\SwitchCountry\Forehead;
+use Opengento\CountryStoreSwitcher\ViewModel\SwitcherUrlProvider;
+
+/** @var Template $block */
+
+$helper = $this->helper(PostHelper::class);
+
+/** @var Localized $localized */
+$localized = $block->getData('localized');
+
+/** @var SwitcherUrlProvider $switcherProvider */
+$switcherProvider = $block->getData('switcherProvider');
+
+/** @var Forehead $countryViewModel */
+$countryViewModel = $block->getData('countryViewModel');
+
+$countries = $countryViewModel->getCountries();
+?>
+<?php if (count($countries)): ?>
+    <?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : '' ?>
+    <div class="switcher country country-store-switcher" data-ui-id="country-store-switcher" id="country-store-switcher<?= $block->escapeHtmlAttr($id) ?>">
+        <div class="options">
+            <div class="action toggle" data-trigger="country-store-switcher">
+                <strong data-bind="scope: 'countryStoreData'">
+                    <span data-bind="text: countryStoreData().name">
+                        <?= $block->escapeHtml(__('Select Country')) ?>
+                    </span>
+                </strong>
+            </div>
+            <div class="modal modal-country modal-country-store-switcher" data-mage-init='{"Magento_Ui/js/modal/modal":{
+                "type": "popup",
+                "title": "<?= $block->escapeHtmlAttr(__('Select Country')) ?>",
+                "trigger": "[data-trigger=country-store-switcher]",
+                "responsive": true,
+                "buttons": [],
+                "focus": false
+            }}'>
+                <div class="content" data-role="content">
+                    <ul class="dropdown list switcher-list">
+                        <?php foreach ($countries as $country): ?>
+                            <li class="view-<?= $block->escapeHtmlAttr(strtolower($country->getCode())) ?> switcher-option">
+                                <a href="#" data-post='<?= $helper->getPostData($block->getData('urlAction'), $switcherProvider->getTargetParams($country)) ?>'>
+                                    <?= $block->escapeHtml($localized->getCountryName($country)) ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?= $block->getChildHtml('more') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
