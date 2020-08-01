@@ -9,9 +9,11 @@ var config = {
             postCountryStoreSwitcher: 'Opengento_CountryStoreSwitcher/js/action/country-store-switcher'
         }
     },
-    mixins: {
-        'Opengento_CountryStore/js/view/country-store-data': {
-            'Opengento_CountryStoreSwitcher/js/view/country-store-data': true
+    config: {
+        mixins: {
+            'Opengento_CountryStore/js/view/country-store-data': {
+                'Opengento_CountryStoreSwitcher/js/view/country-store-data': true
+            }
         }
     }
 };
