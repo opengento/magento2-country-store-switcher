@@ -29,19 +29,19 @@ $countries = $countryViewModel->getCountries();
 <?php if (count($countries)): ?>
     <div class="field field-country-store-switcher" data-bind="scope: 'countryStoreData'">
         <label class="label" for="country-store-switcher-more">
-            <span><?= $block->escapeHtml(__('More Countries')) ?></span>
+            <span><?= $escaper->escapeHtml(__('More Countries')) ?></span>
         </label>
         <div class="control">
             <select class="select" id="country-store-switcher-more" data-role="country-store-switcher-post" data-mage-init='{"postCountryStoreSwitcher":{}}'>
                 <option value="" class="view">
-                    <?= $block->escapeHtml(__('-- Please select --')) ?>
+                    <?= $escaper->escapeHtml(__('-- Please select --')) ?>
                 </option>
                 <?php foreach ($countries as $country): ?>
-                    <option value="<?= $block->escapeHtmlAttr($country->getCode()) ?>"
-                            class="view-<?= $block->escapeHtmlAttr(strtolower($country->getCode())) ?> switcher-option"
+                    <option value="<?= $escaper->escapeHtmlAttr($country->getCode()) ?>"
+                            class="view-<?= $escaper->escapeHtmlAttr(strtolower($country->getCode())) ?> switcher-option"
                             data-post='<?= $helper->getPostData($block->getData('urlAction'), $switcherProvider->getTargetParams($country)) ?>'
-                            data-bind="attr: {selected: countryStoreData().code === '<?= $block->escapeHtml($country->getCode()) ?>' ? 'selected' : null}">
-                        <?= $block->escapeHtml($localized->getCountryName($country)) ?>
+                            data-bind="attr: {selected: countryStoreData().code === '<?= $escaper->escapeHtml($country->getCode()) ?>' ? 'selected' : null}">
+                        <?= $escaper->escapeHtml($localized->getCountryName($country)) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
