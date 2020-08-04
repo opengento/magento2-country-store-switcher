@@ -28,26 +28,26 @@ $countries = $countryViewModel->getCountries();
 ?>
 <?php if (count($countries)): ?>
     <?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : '' ?>
-    <div class="switcher country country-store-switcher" data-ui-id="country-store-switcher" id="country-store-switcher<?= $block->escapeHtmlAttr($id) ?>">
-        <strong class="label switcher-label"><span><?= $block->escapeHtml(__('Select Country')) ?></span></strong>
+    <div class="switcher country country-store-switcher" data-ui-id="country-store-switcher" id="country-store-switcher<?= $escaper->escapeHtmlAttr($id) ?>">
+        <strong class="label switcher-label"><span><?= $escaper->escapeHtml(__('Select Country')) ?></span></strong>
         <div class="actions dropdown options switcher-options">
             <div class="action toggle switcher-trigger"
-                 id="country-store-switcher-trigger<?= $block->escapeHtmlAttr($id) ?>"
+                 id="country-store-switcher-trigger<?= $escaper->escapeHtmlAttr($id) ?>"
                  data-mage-init='{"dropdown":{}}'
                  data-toggle="dropdown"
                  data-trigger-keypress-button="true">
                 <strong data-bind="scope: 'countryStoreData'" >
                     <span data-bind="text: countryStoreData().name">
-                        <?= $block->escapeHtml(__('Select Country')) ?>
+                        <?= $escaper->escapeHtml(__('Select Country')) ?>
                     </span>
                 </strong>
             </div>
             <ul class="dropdown switcher-dropdown" data-target="dropdown" data-bind="scope: 'countryStoreData'" >
                 <?php foreach ($countries as $country): ?>
-                    <li class="view-<?= $block->escapeHtmlAttr(strtolower($country->getCode())) ?> switcher-option"
-                        data-bind="visible: countryStoreData().code !== '<?= $block->escapeHtml($country->getCode()) ?>'">
+                    <li class="view-<?= $escaper->escapeHtmlAttr(strtolower($country->getCode())) ?> switcher-option"
+                        data-bind="visible: countryStoreData().code !== '<?= $escaper->escapeHtml($country->getCode()) ?>'">
                         <a href="#" data-post='<?= $helper->getPostData($block->getData('urlAction'), $switcherProvider->getTargetParams($country)) ?>'>
-                            <?= $block->escapeHtml($localized->getCountryName($country)) ?>
+                            <?= $escaper->escapeHtml($localized->getCountryName($country)) ?>
                         </a>
                     </li>
                 <?php endforeach; ?>
