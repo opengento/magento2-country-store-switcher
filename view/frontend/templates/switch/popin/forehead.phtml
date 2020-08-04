@@ -28,18 +28,18 @@ $countries = $countryViewModel->getCountries();
 ?>
 <?php if (count($countries)): ?>
     <?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : '' ?>
-    <div class="switcher country country-store-switcher" data-ui-id="country-store-switcher" id="country-store-switcher<?= $block->escapeHtmlAttr($id) ?>">
+    <div class="switcher country country-store-switcher" data-ui-id="country-store-switcher" id="country-store-switcher<?= $escaper->escapeHtmlAttr($id) ?>">
         <div class="options">
             <div class="action toggle" data-trigger="country-store-switcher">
                 <strong data-bind="scope: 'countryStoreData'">
                     <span data-bind="text: countryStoreData().name">
-                        <?= $block->escapeHtml(__('Select Country')) ?>
+                        <?= $escaper->escapeHtml(__('Select Country')) ?>
                     </span>
                 </strong>
             </div>
             <div class="modal modal-country modal-country-store-switcher" data-mage-init='{"Magento_Ui/js/modal/modal":{
                 "type": "popup",
-                "title": "<?= $block->escapeHtmlAttr(__('Select Country')) ?>",
+                "title": "<?= $escaper->escapeHtmlAttr(__('Select Country')) ?>",
                 "trigger": "[data-trigger=country-store-switcher]",
                 "responsive": true,
                 "buttons": [],
@@ -48,9 +48,9 @@ $countries = $countryViewModel->getCountries();
                 <div class="content" data-role="content">
                     <ul class="dropdown list switcher-list">
                         <?php foreach ($countries as $country): ?>
-                            <li class="view-<?= $block->escapeHtmlAttr(strtolower($country->getCode())) ?> switcher-option">
+                            <li class="view-<?= $escaper->escapeHtmlAttr(strtolower($country->getCode())) ?> switcher-option">
                                 <a href="#" data-post='<?= $helper->getPostData($block->getData('urlAction'), $switcherProvider->getTargetParams($country)) ?>'>
-                                    <?= $block->escapeHtml($localized->getCountryName($country)) ?>
+                                    <?= $escaper->escapeHtml($localized->getCountryName($country)) ?>
                                 </a>
                             </li>
                         <?php endforeach; ?>
