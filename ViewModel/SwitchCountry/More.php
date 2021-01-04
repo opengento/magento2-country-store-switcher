@@ -28,6 +28,7 @@ final class More implements ArgumentInterface
         $this->scopeConfig = $scopeConfig;
         $this->countryRepository = $countryRepository;
     }
+
     public function getCountries(): array
     {
         $countries = [];
