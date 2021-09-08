@@ -6,12 +6,14 @@
 declare(strict_types=1);
 
 use Magento\Framework\Data\Helper\PostHelper;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Opengento\CountryStoreSwitcher\ViewModel\Localized;
 use Opengento\CountryStoreSwitcher\ViewModel\SwitchCountry\Forehead;
 use Opengento\CountryStoreSwitcher\ViewModel\SwitcherUrlProvider;
 
 /** @var Template $block */
+/** @var Escaper $escaper */
 
 $helper = $this->helper(PostHelper::class);
 
