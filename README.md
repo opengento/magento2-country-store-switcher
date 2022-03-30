@@ -21,7 +21,7 @@ This module will allows the customers to switch of store by country instead of n
 
 Magento 2 Open Source or Commerce edition is required.
 
-###  Composer installation
+### Composer installation
 
 Run the following composer command:
 
