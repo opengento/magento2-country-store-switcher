@@ -20,33 +20,14 @@ use Opengento\CountryStore\Api\CountryStoreResolverInterface;
 
 class Redirect implements HttpPostActionInterface
 {
-    private RedirectFactory $redirectFactory;
-
-    private RequestInterface $request;
-
-    private ManagerInterface $messageManager;
-
-    private CountryRegistryInterface $countryRegistry;
-
-    private CountryStoreResolverInterface $countryStoreResolver;
-
-    private StoreManagerInterface $storeManager;
-
     public function __construct(
-        RedirectFactory $redirectFactory,
-        RequestInterface $request,
-        ManagerInterface $messageManager,
-        CountryRegistryInterface $countryRegistry,
-        CountryStoreResolverInterface $countryStoreResolver,
-        StoreManagerInterface $storeManager
-    ) {
-        $this->redirectFactory = $redirectFactory;
-        $this->request = $request;
-        $this->messageManager = $messageManager;
-        $this->countryRegistry = $countryRegistry;
-        $this->countryStoreResolver = $countryStoreResolver;
-        $this->storeManager = $storeManager;
-    }
+        private RedirectFactory $redirectFactory,
+        private RequestInterface $request,
+        private ManagerInterface $messageManager,
+        private CountryRegistryInterface $countryRegistry,
+        private CountryStoreResolverInterface $countryStoreResolver,
+        private StoreManagerInterface $storeManager
+    ) {}
 
     public function execute(): ResultInterface
     {

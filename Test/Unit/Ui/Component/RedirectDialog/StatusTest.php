@@ -17,17 +17,12 @@ use PHPUnit\Framework\TestCase;
  */
 class StatusTest extends TestCase
 {
-    /**
-     * @var MockObject|ScopeConfigInterface
-     */
-    private $scopeConfig;
-
+    private MockObject|ScopeConfigInterface $scopeConfig;
     private Status $status;
 
     protected function setUp(): void
     {
         $this->scopeConfig = $this->getMockForAbstractClass(ScopeConfigInterface::class);
-
         $this->status = new Status($this->scopeConfig);
     }
 

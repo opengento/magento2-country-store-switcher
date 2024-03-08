@@ -16,23 +16,10 @@ use Psr\Log\LoggerInterface;
 
 final class ReadHandler implements ExtensionInterface
 {
-    /**
-     * @var CountryStoreResolverInterface
-     */
-    private CountryStoreResolverInterface $countryStoreResolver;
-
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
-
     public function __construct(
-        CountryStoreResolverInterface $countryStoreResolver,
-        LoggerInterface $logger
-    ) {
-        $this->countryStoreResolver = $countryStoreResolver;
-        $this->logger = $logger;
-    }
+        private CountryStoreResolverInterface $countryStoreResolver,
+        private LoggerInterface $logger
+    ) {}
 
     public function execute($entity, $arguments = null): CountryInterface
     {

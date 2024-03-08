@@ -21,23 +21,14 @@ use Psr\Log\LoggerInterface;
  */
 class LocalizedTest extends TestCase
 {
-    /**
-     * @var MockObject|ScopeConfigInterface
-     */
-    private $scopeConfig;
-
-    /**
-     * @var MockObject|CountryStoreResolverInterface
-     */
-    private $countryStoreResolver;
-
+    private MockObject|ScopeConfigInterface $scopeConfig;
+    private MockObject|CountryStoreResolverInterface $countryStoreResolver;
     private Localized $localized;
 
     protected function setUp(): void
     {
         $this->scopeConfig = $this->getMockForAbstractClass(ScopeConfigInterface::class);
         $this->countryStoreResolver = $this->getMockForAbstractClass(CountryStoreResolverInterface::class);
-
         $this->localized = new Localized(
             $this->scopeConfig,
             $this->countryStoreResolver,
@@ -62,8 +53,7 @@ class LocalizedTest extends TestCase
     public function localizedData(): array
     {
         $localizedCountryUs = $this->getMockForAbstractClass(CountryInterface::class);
-        $localizedCountryUs->method('getLocalizedName')
-            ->willReturnMap([['en_US', 'United States'], ['fr_FR', 'États-Unis']]);
+        $localizedCountryUs->method('getLocalizedName')->willReturnMap([['en_US', 'United States'], ['fr_FR', 'États-Unis']]);
         $localizedCountryFr = $this->getMockForAbstractClass(CountryInterface::class);
         $localizedCountryFr->method('getLocalizedName')->willReturnMap([['en_US', 'France'], ['fr_FR', 'France']]);
         $countryUs = $this->getMockForAbstractClass(CountryInterface::class);

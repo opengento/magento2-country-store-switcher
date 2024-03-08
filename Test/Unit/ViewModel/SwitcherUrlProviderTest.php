@@ -26,23 +26,14 @@ use function base64_encode;
  */
 class SwitcherUrlProviderTest extends TestCase
 {
-    /**
-     * @var MockObject|EncoderInterface
-     */
-    private $urlEncoder;
-
-    /**
-     * @var MockObject|CountryStoreResolverInterface
-     */
-    private $countryStoreResolver;
-
+    private MockObject|EncoderInterface $urlEncoder;
+    private MockObject|CountryStoreResolverInterface $countryStoreResolver;
     private SwitcherUrlProvider $switcherUrlProvider;
 
     protected function setUp(): void
     {
         $this->urlEncoder = $this->getMockForAbstractClass(EncoderInterface::class);
         $this->countryStoreResolver = $this->getMockForAbstractClass(CountryStoreResolverInterface::class);
-
         $this->switcherUrlProvider = new SwitcherUrlProvider(
             $this->urlEncoder,
             $this->countryStoreResolver,

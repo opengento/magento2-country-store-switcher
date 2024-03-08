@@ -10,6 +10,7 @@ namespace Opengento\CountryStoreSwitcher\Test\Unit\ViewModel\SwitchCountry;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Opengento\CountryStore\Api\CountryRepositoryInterface;
 use Opengento\CountryStore\Api\Data\CountryInterface;
+use Opengento\CountryStoreSwitcher\Provider\Config\CountryProvider;
 use Opengento\CountryStoreSwitcher\ViewModel\SwitchCountry\More;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -19,16 +20,9 @@ use PHPUnit\Framework\TestCase;
  */
 class MoreTest extends TestCase
 {
-    /**
-     * @var MockObject|ScopeConfigInterface
-     */
-    private $scopeConfig;
-
-    /**
-     * @var MockObject|CountryRepositoryInterface
-     */
-    private $countryRepository;
-
+    private MockObject|ScopeConfigInterface $scopeConfig;
+    private MockObject|CountryRepositoryInterface $countryRepository;
+    private CountryProvider $countryProvider;
     private More $more;
 
     /**
@@ -40,8 +34,8 @@ class MoreTest extends TestCase
     {
         $this->scopeConfig = $this->getMockForAbstractClass(ScopeConfigInterface::class);
         $this->countryRepository = $this->getMockForAbstractClass(CountryRepositoryInterface::class);
-
-        $this->more = new More($this->scopeConfig, $this->countryRepository);
+        $this->countryProvider = new CountryProvider($this->scopeConfig, $this->countryRepository);
+        $this->more = new More($this->countryProvider);
     }
 
     /**
@@ -73,6 +67,18 @@ class MoreTest extends TestCase
                     $this->createCountryMock('FR'),
                 ],
             ],
+            [
+                ' US, CA , FR ',
+                [
+                    $this->createCountryMock('US'),
+                    $this->createCountryMock('CA'),
+                    $this->createCountryMock('FR'),
+                ],
+            ],
+            [
+                '',
+                [],
+            ]
         ];
     }
 

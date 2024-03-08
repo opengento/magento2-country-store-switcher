@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Opengento\CountryStoreSwitcher\Test\Unit\Model\Country;
+namespace Opengento\CountryStoreSwitcher\Test\Unit\Model\ResourceModel\Country\Relation;
 
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\Store;
@@ -23,17 +23,12 @@ use Psr\Log\LoggerInterface;
  */
 class ReadHandlerTest extends TestCase
 {
-    /**
-     * @var MockObject|CountryStoreResolverInterface
-     */
-    private $countryStoreResolver;
-
+    private MockObject|CountryStoreResolverInterface $countryStoreResolver;
     private ReadHandler $readHandler;
 
     protected function setUp(): void
     {
         $this->countryStoreResolver = $this->getMockForAbstractClass(CountryStoreResolverInterface::class);
-
         $this->readHandler = new ReadHandler(
             $this->countryStoreResolver,
             $this->getMockForAbstractClass(LoggerInterface::class)
@@ -59,7 +54,6 @@ class ReadHandlerTest extends TestCase
 
         $this->countryStoreResolver->method('getStoreAware')->will($store);
 
-        /** @var CountryInterface $extensionCountry */
         $extensionCountry = $this->readHandler->execute($countryMock);
 
         $this->assertSame($countryMock, $extensionCountry);
